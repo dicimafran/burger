@@ -1,16 +1,38 @@
 
-// Dependencies
+/* ======================= Server Table of contents =====================
+    
+    Dependencies: 
+        express
+        bodyparser
+        routes: burger_controller.js
+        express-handlebars
+    
+    Connections: port 8080
+
+    ---------------
+    Server stuff: 
+        - serves static content from 'public' directory'
+        - parses application: 
+            x-www-form-urlencoded 
+            json
+
+    Handlebars
+        app.engine & app.set: sets up handlebars as default templating engine
+
+======================================================================= */
+
+//  Dependencies
     const express = require('express');
     const bodyparser= require('body-parser');
 
-    var routes = require('./controllers/burgers_controller.js');
     var exphbs = require('express-handlebars');
+    var routes = require('./controllers/burgers_controller.js');
 
 // Connections
     var PORT= process.env.PORT || 8080;
     var app= express();
 
-// Server content --> static content & parsing
+// Server stuff 
     app.use(express.static('public'));
 
     app.use(bodyparser.urlencoded({ extended:true }));
