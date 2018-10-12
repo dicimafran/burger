@@ -1,51 +1,31 @@
+//express dependenceis
+var express = require("express");
+var bodyParser = require("body-parser");
 
-/* ======================= Server Table of contents =====================
-    
-    Dependencies: 
-        express
-        bodyparser
-        routes: burger_controller.js
-        express-handlebars
-    
-    Connections: port 8080
+var PORT = process.env.PORT || 3000;
 
-    ---------------
-    Server stuff: 
-        - serves static content from 'public' directory'
-        - parses application: 
-            x-www-form-urlencoded 
-            json
+//express app
+var app = express();
 
-    Handlebars
-        app.engine & app.set: sets up handlebars as default templating engine
+app.use(express.static("public"));
 
-======================================================================= */
+// parse
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-//  Dependencies
-    const express = require('express');
-    const bodyparser= require('body-parser');
+// Set Handlebars.
+var hBar = require("express-handlebars");
 
-    var exphbs = require('express-handlebars');
-    var routes = require('./controllers/burgers_controller.js');
+app.engine("handlebars", hBar({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
-// Connections
-    var PORT= process.env.PORT || 8080;
-    var app= express();
+// Import routes and give the server access to them.
+var routes = require("./controllers/burgerController.js");
 
-// Server stuff 
-    app.use(express.static('public'));
+app.use(routes);
 
-    app.use(bodyparser.urlencoded({ extended:true }));
-    app.use(bodyparser.json());
-
-// Handlebars
-    app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
-    app.set('view engine', handlebars);
-
-// Route importing
-    app.use(routes);
-
-// Port listener so server can listen to client requests
-    app.listen(PORT, function () {
-        console.log('Server listening on: http://localhost:' + PORT);
-    });
+// Start our server so that it can begin listening to client requests.
+app.listen(PORT, function() {
+  // Log (server-side) when our server has started
+  console.log("Server listening on: http://localhost:" + PORT);
+});
