@@ -23,6 +23,7 @@
         <div class="col s12 m6">
             <ul>
                     {{#each burger}}
+                    <!-- It seems > is needed to work. Format: > name of the orm / exported orm + property of orm-->
                     {{> burger/burger-block }}
                     {{/each}}
             </ul>
