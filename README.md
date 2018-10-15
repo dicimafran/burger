@@ -13,3 +13,7 @@ This is an app for a restaurant with a suspiciously similar name to a certain fa
 * Each burger in the waiting area has a button with polite reminder to `Devour it!`. 
 
 * The app will store every burger in a database, whether devoured or not.
+
+## You can try this app out at heroku!
+
+https://frozen-sea-85705.herokuapp.com/
